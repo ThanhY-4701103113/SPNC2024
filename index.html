@@ -7,10 +7,29 @@
   <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <div class="kt" onclick="addt()">Kiểm tra</div>
-  <div class="kq" onclick="addt()">✔ Bạn đã đúng 0/3</div>
+  <div class="home">
+    <div class="start" onclick="addstart()">
+      BẮT ĐẦU
+    </div>
+    <div class="hd" onclick="addhd()">
+      HƯỚNG DẪN
+    </div>
+    <div class="tthd d-none">
+      <img src="./HD1.png" class="hd1 d-none">
+      <img src="./HD2.png" class="hd2 d-none">
+    </div>
+    <div class="next d-none" onclick="addhd()"><i class="fas fa-arrow-right"></i> </div>
+  </div>
+  <div class="khung">
+    <div class="bottom-left"></div>
+    <div class="bottom-right"></div>
+  </div>
+  <div class="thoat" onclick="addstart()"><i class="fa fa-home"></i></div>
+  <div class="kt d-none" onclick="addt()">Kiểm tra</div>
+  <div class="kq d-none" onclick="addt()">✔ Bạn đã đúng 0/3</div>
   <section class="cau-hoi d-none">
     <div class="nd-ch">
       <p class="noidungcauhoi"></p>
@@ -41,77 +60,43 @@
       <div class="checktrue">Bạn đã đúng 1/3</div>
     </div>
   </div>
+  <div id="onvideo" onclick="offkhung()">
+    Video
+  </div>
   <a-scene
+    id="scene"
     vr-mode-ui="enabled: false;"
     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
   >
-    <a-nft 
-      type="nft" 
-      url="Model/C5_12-1"       
-      smooth="true" 
-      smoothCount="100" 
-      smoothTolerance="0.005" 
-      smoothThreshold="100">
-      <a-entity id="box-and-text" position="200 0 -200" rotation="-90 0 0" scale="1 1 1">
-      <a-image src="#pbc" position="0 0 0" width="500" height="500"></a-image>
+    <a-entity id="box-and-text" visible="false" position="0 0 -3" rotation="0 0 0" scale="1 1 1">
+      <!-- Mô hình 3D -->
+      <a-entity 
+        gltf-model="TV.glb" 
+        position="0 -0.4 0" 
+        scale="1.5 1.5 2.8" 
+        rotation="0 90 0">
       </a-entity>
-    </a-nft>
-    <a-nft 
-      type="nft" 
-      url="Model/C5_12-2"
-      smooth="true" 
-      smoothCount="100" 
-      smoothTolerance="0.005" 
-      smoothThreshold="100"
-      >
-      <a-entity id="box-and-text" position="200 0 -200" rotation="-90 0 0" scale="1 1 1">
-        <a-image src="#pct" position="0 0 0" width="500" height="500"></a-image>
-      </a-entity>
-    </a-nft>
-    <a-nft 
-      type="nft" 
-      url="Model/C5_12-3"
-      smooth="true" 
-      smoothCount="100" 
-      smoothTolerance="0.005" 
-      smoothThreshold="100"
-      >
-      <a-entity id="box-and-text" position="200 0 -200" rotation="-90 0 0" scale="1 1 1">
-        <a-image src="#pct" position="0 0 0" width="500" height="500"></a-image>
-      </a-entity>
-    </a-nft>
-    <a-nft 
-      type="nft" 
-      url="Model/C5_12-4"
-      smooth="true" 
-      smoothCount="100" 
-      smoothTolerance="0.005" 
-      smoothThreshold="100"
-      >
-      <a-entity id="box-and-text" position="200 0 -200" rotation="-90 0 0" scale="1 1 1">
-        <a-image src="#pct" position="0 0 0" width="500" height="500"></a-image>
-      </a-entity>
-    </a-nft>
-    <a-nft 
-      type="nft" 
-      url="Model/C5_12-5"
-      smooth="true" 
-      smoothCount="100" 
-      smoothTolerance="0.005" 
-      smoothThreshold="100"
-      >
-      <a-entity id="box-and-text" position="200 0 -200" rotation="-90 0 0" scale="1 1 1">
-        <a-image src="#pct" position="0 0 0" width="500" height="500"></a-image>
-      </a-entity>
-    </a-nft>
-    <a-assets>
-      <img id="pbc" src="Object/PhanBoiChau.png">
-      <img id="pct" src="Object/PhanChauTrinh.png">
-    </a-assets>
+      <!-- Video -->
+      <a-video
+        id="video-screen"
+        src="#s"
+        width="1.65"
+        height="0.62"
+        position="0.06 0.03 0.38"
+        rotation="0 0 0"
+        autoplay="false"
+        loop
+      ></a-video>
+    </a-entity>
     <!-- Camera entity -->
     <a-entity camera></a-entity>
+    <video
+        id="s"
+        src="PBC.mp4"
+        crossorigin="anonymous"
+        style="display: none;">
+    </video>
   </a-scene>
-
   <script src="index.js">
   </script>
 </body>

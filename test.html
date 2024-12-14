@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học tập cùng Ý</title>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  </head>
+  <body>
+    <button id="toggle-entity" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+      Hiển thị/Ẩn Mô hình
+    </button>
+    <a-scene vr-mode-ui="enabled: false;" arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+      <a-entity id="box-and-text" visible="false" position="0 0 -3" rotation="0 0 0" scale="1 1 1">
+        <!-- Mô hình 3D -->
+        <a-entity 
+          gltf-model="TV.glb" 
+          position="0 0 0" 
+          scale="1.5 1.5 2.8" 
+          rotation="0 90 0">
+        </a-entity>
+        <!-- Video -->
+        <a-video
+          id="video-screen"
+          src="#s"
+          width="1.65"
+          height="0.62"
+          position="0.06 0.43 0.38"
+          rotation="0 0 0"
+          autoplay="false"
+          loop
+        ></a-video>
+      </a-entity>
+      
+      <a-entity camera></a-entity>
+      <video
+        id="s"
+        src="PBC.mp4"
+        crossorigin="anonymous"
+        style="display: none;">
+      </video>
+    </a-scene>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const button = document.getElementById("toggle-entity");
+        const entity = document.getElementById("box-and-text");
+        const videoElement = document.getElementById("s");
+
+        // Toggle visibility và play/pause video khi bấm nút
+        button.addEventListener("click", () => {
+          const isVisible = entity.getAttribute("visible");
+          entity.setAttribute("visible", !isVisible);
+
+          if (!isVisible) {
+            videoElement.play();
+          } else {
+            videoElement.pause();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
