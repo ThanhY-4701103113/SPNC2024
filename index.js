@@ -774,7 +774,7 @@ nftData.forEach((data) => {
   entity.setAttribute("class", "box-and-text");
   entity.setAttribute("position", "200 0 -200");
   entity.setAttribute("rotation", "-90 0 0");
-  entity.setAttribute("scale", "1.5 1.5 1.5");
+  entity.setAttribute("scale", "1.1 1.1 1.1");
 
   const image = document.createElement("a-image");
   image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
