@@ -47,24 +47,83 @@ document.addEventListener('touchstart', onPointerDown);
 document.addEventListener('touchmove', onPointerMove);
 document.addEventListener('touchend', onPointerUp);
 
+
+const nftData = [
+  { url: "Model/C5_12_1", src: "Object/C5_12_1.png" },
+  { url: "Model/C5_12_2", src: "Object/C5_12_2.png" },
+  { url: "Model/C5_12_3", src: "Object/C5_12_3.png" },
+  { url: "Model/C5_12_4", src: "Object/C5_12_4.png" },
+  { url: "Model/C5_13_1", src: "Object/C5_13_1.png" },
+  { url: "Model/C5_13_2", src: "Object/C5_13_2.png" },
+  { url: "Model/C5_13_3", src: "Object/C5_13_3.png" },
+  { url: "Model/C5_13_4", src: "Object/C5_13_4.png" },
+  { url: "Model/C5_13_5", src: "Object/C5_13_5.png" },
+  { url: "Model/C5_13_6", src: "Object/C5_13_6.png" },
+  { url: "Model/C5_13_7", src: "Object/C5_13_7.png" },
+  { url: "Model/C5_13_8", src: "Object/C5_13_8.png" },
+  { url: "Model/C5_13_9", src: "Object/C5_13_9.png" },
+  { url: "Model/C5_13_10", src: "Object/C5_13_10.png" },
+  { url: "Model/C5_13_11", src: "Object/C5_13_11.png" },
+];
+const scene = document.getElementById("scene");
+
+nftData.forEach((data) => {
+  const nft = document.createElement("a-nft");
+  nft.setAttribute("type", "nft");
+  nft.setAttribute("url", data.url);
+  // nft.setAttribute("smooth", "true");
+  // nft.setAttribute("smoothCount", "10");
+  // nft.setAttribute("smoothTolerance", "0.02");
+  // nft.setAttribute("smoothThreshold", "3");
+
+  const entity = document.createElement("a-entity");
+  entity.setAttribute("class", "box-and-text");
+  entity.setAttribute("position", "200 300 -250");
+  entity.setAttribute("rotation", "-90 0 0");
+  entity.setAttribute("scale", "1.5 1.5 1.5");
+  entity.getAttribute("visible","true");
+  
+  const image = document.createElement("a-image");
+  image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
+  image.setAttribute("position", "0 0 0");
+  image.setAttribute("width", "300");
+  image.setAttribute("height", "300");
+
+  entity.appendChild(image);
+  nft.appendChild(entity);
+  
+  scene.appendChild(nft);
+  scene.appendChild(entity);
+
+  console.log('goodvisible');
+});
 var tpic=1;
 //Sự kiện nft
 document.addEventListener('DOMContentLoaded', function () {
   // Lấy tất cả các thẻ NFT
   const nftMarkers = document.querySelectorAll('a-nft');
-
+  const enti = document.querySelectorAll('.box-and-text');
   // Lấy thẻ div cần hiển thị
   const confirmationDiv = document.querySelector('.kt');
   const kq = document.querySelector('.kq');
 
   nftMarkers.forEach((marker, index) => {
     marker.addEventListener('markerFound', () => {
+      // Lấy vị trí của marker (tọa độ) trong không gian 3D
+      const position = marker.getAttribute('position'); // Trả về chuỗi "x y z"
+      console.log('Position data type:', typeof position);
+      console.log(position.x);
+      console.log(position.y);
+      console.log(position.z);
       console.log('NFT marker found at position:', index + 1); 
       tpic=index+1;
       // Hiển thị thẻ div khi tìm thấy marker
       confirmationDiv.style.display = 'block';
-      kq.style.display = 'block';
+      kq.style.display = 'block'; 
       loadQuestionsByTopic(tpic);
+      enti[index].setAttribute("position", "0 0 -50");
+      enti[index].setAttribute("rotation", "0 0 0");
+      enti[index].setAttribute("scale", "0.1 0.1 0.1");
     });
 
     marker.addEventListener('markerLost', () => {
@@ -724,6 +783,7 @@ function offkhung(){
 //video
 document.addEventListener("DOMContentLoaded", function () {
   const button = document.getElementById("onvideo");
+  const out = document.getElementById("thoat");
   const entity = document.getElementById("box-and-text");
   const videoElement = document.getElementById("s");
 
@@ -731,58 +791,21 @@ document.addEventListener("DOMContentLoaded", function () {
   button.addEventListener("click", () => {
     const isVisible = entity.getAttribute("visible");
     entity.setAttribute("visible", !isVisible);
-    
+    offkhung();
     if (!isVisible) {
       videoElement.play();
     } else {
       videoElement.pause();
     }
   });
+  out.addEventListener("click", () => {
+    const isVisible = entity.getAttribute("visible");
+    if (isVisible) {
+      entity.setAttribute("visible", !isVisible);
+      offkhung();
+      videoElement.pause();
+    }
+  });
 });
 
 
-
-const nftData = [
-  { url: "Model/C5_12_1", src: "Object/C5_12_1.png" },
-  { url: "Model/C5_12_2", src: "Object/C5_12_2.png" },
-  { url: "Model/C5_12_3", src: "Object/C5_12_3.png" },
-  { url: "Model/C5_12_4", src: "Object/C5_12_4.png" },
-  { url: "Model/C5_13_1", src: "Object/C5_13_1.png" },
-  { url: "Model/C5_13_2", src: "Object/C5_13_2.png" },
-  { url: "Model/C5_13_3", src: "Object/C5_13_3.png" },
-  { url: "Model/C5_13_4", src: "Object/C5_13_4.png" },
-  { url: "Model/C5_13_5", src: "Object/C5_13_5.png" },
-  { url: "Model/C5_13_6", src: "Object/C5_13_6.png" },
-  { url: "Model/C5_13_7", src: "Object/C5_13_7.png" },
-  { url: "Model/C5_13_8", src: "Object/C5_13_8.png" },
-  { url: "Model/C5_13_9", src: "Object/C5_13_9.png" },
-  { url: "Model/C5_13_10", src: "Object/C5_13_10.png" },
-  { url: "Model/C5_13_11", src: "Object/C5_13_11.png" },
-];
-const scene = document.getElementById("scene");
-
-nftData.forEach((data) => {
-  const nft = document.createElement("a-nft");
-  nft.setAttribute("type", "nft");
-  nft.setAttribute("url", data.url);
-  nft.setAttribute("smooth", "true");
-  nft.setAttribute("smoothCount", "100");
-  nft.setAttribute("smoothTolerance", "0.005");
-  nft.setAttribute("smoothThreshold", "100");
-
-  const entity = document.createElement("a-entity");
-  entity.setAttribute("class", "box-and-text");
-  entity.setAttribute("position", "200 0 -200");
-  entity.setAttribute("rotation", "-90 0 0");
-  entity.setAttribute("scale", "1.1 1.1 1.1");
-
-  const image = document.createElement("a-image");
-  image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
-  image.setAttribute("position", "0 0 0");
-  image.setAttribute("width", "500");
-  image.setAttribute("height", "500");
-
-  entity.appendChild(image);
-  nft.appendChild(entity);
-  scene.appendChild(nft);
-});
