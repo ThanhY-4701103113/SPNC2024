@@ -87,7 +87,7 @@ nftData.forEach((data) => {
   image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
   image.setAttribute("position", "0 0 0");
   image.setAttribute("width", "300");
-  image.setAttribute("height", "300");
+  image.setAttribute("height", "350");
 
   entity.appendChild(image);
   nft.appendChild(entity);
