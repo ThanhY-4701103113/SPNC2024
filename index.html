@@ -12,8 +12,8 @@
 <body>
   <a-scene
     id="scene"
-    embedded
-    arjs="sourceType: webcam; debugUIEnabled: false;"
+    vr-mode-ui="enabled: false;"
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
   >
     <a-entity camera="far: 2000; near: 0.1;"></a-entity>
   </a-scene>
