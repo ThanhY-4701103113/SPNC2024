@@ -28,7 +28,7 @@ nftData.forEach((data) => {
 
   const entity = document.createElement("a-entity");
   entity.setAttribute("class", "box-and-text");
-  entity.setAttribute("position", "0 0 0");
+  entity.setAttribute("position", "0 0 -590");
   entity.setAttribute("rotation", "0 0 0");
   entity.setAttribute("scale", "1 1 1");
   entity.setAttribute("visible","true");
