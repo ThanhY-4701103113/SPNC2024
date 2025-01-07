@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
           confirmationDiv.style.display = 'none';
           kq.style.display = 'none';
         }
-      }, 1200); // 2 giây
+      }, 1000); // 1 giây
     });
     //vị trí ban đầu
     const currentPosition = { x: 0, y: 0, z: -2000 };
@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
           Math.abs(currentPosition.y - targetPosition.y) > MAX_DISTANCE ||
           Math.abs(currentPosition.z - targetPosition.z) > MAX_DISTANCE) {
             // Tính toán vị trí mượt
-          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 220/2, 0.15); // Alpha = 0.1
-          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 250/2, 0.15);
+          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 210/2, 0.15); // Alpha = 0.1
+          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 260/2, 0.15);
           currentPosition.z = lerp(currentPosition.z, targetPosition.z/2, 0.15);
 
           // Cập nhật vị trí cho `enti`
