@@ -30,14 +30,14 @@ nftData.forEach((data) => {
   entity.setAttribute("class", "box-and-text");
   entity.setAttribute("position", "0 0 0");
   entity.setAttribute("rotation", "0 0 0");
-  entity.setAttribute("scale", "1.5 1.5 1.5");
+  entity.setAttribute("scale", "1 1 1");
   entity.setAttribute("visible","true");
   
   const image = document.createElement("a-image");
   image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
   image.setAttribute("position", "0 0 0");
-  image.setAttribute("width", "300");
-  image.setAttribute("height", "300");
+  image.setAttribute("width", "500");
+  image.setAttribute("height", "500");
 
   entity.appendChild(image);
   // nft.appendChild(entity);
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (trackedEntities[index]) {
         const position = marker.object3D.position; // Truy cập trực tiếp vị trí thông qua `object3D`
         console.log(`Marker ${index + 1} position:`, position);
-        enti[index].setAttribute("position", `${position.x+250} ${position.y+250} ${position.z/1.5}`);
+        enti[index].setAttribute("position", `${position.x+200} ${position.y+250} ${position.z}`);
         // Cập nhật vị trí cho đối tượng liên quan (nếu có)
         // const attachedEntity = marker.querySelector('.box-and-text');
         // if (attachedEntity) {
