@@ -36,8 +36,8 @@ nftData.forEach((data) => {
   const image = document.createElement("a-image");
   image.setAttribute("src", data.src); // Đường dẫn tới ảnh trong thư mục Object/
   image.setAttribute("position", "0 0 0");
-  image.setAttribute("width", "500");
-  image.setAttribute("height", "500");
+  image.setAttribute("width", "300");
+  image.setAttribute("height", "300");
 
   entity.appendChild(image);
   // nft.appendChild(entity);
@@ -71,17 +71,26 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('NFT marker lost!');
 
     });
+    //vị trí ban đầu
+    const currentPosition = { x: 0, y: 0, z: -2000 };
+     // Hàm tính toán vị trí mượt
+    const lerp = (start, end, alpha) => start + (end - start) * alpha;
+    const MAX_DISTANCE = 50;
     // Lấy vị trí liên tục
     const updateMarkerPosition = () => {
       if (trackedEntities[index]) {
-        const position = marker.object3D.position; // Truy cập trực tiếp vị trí thông qua `object3D`
-        console.log(`Marker ${index + 1} position:`, position);
-        enti[index].setAttribute("position", `${position.x+200} ${position.y+250} ${position.z}`);
-        // Cập nhật vị trí cho đối tượng liên quan (nếu có)
-        // const attachedEntity = marker.querySelector('.box-and-text');
-        // if (attachedEntity) {
-        //   attachedEntity.setAttribute('position', position);
-        // }
+        const targetPosition = marker.object3D.position; // Vị trí mục tiêu từ marker
+        if (Math.abs(currentPosition.x - targetPosition.x) > MAX_DISTANCE ||
+          Math.abs(currentPosition.y - targetPosition.y) > MAX_DISTANCE ||
+          Math.abs(currentPosition.z - targetPosition.z) > MAX_DISTANCE) {
+            // Tính toán vị trí mượt
+          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 220/2, 0.15); // Alpha = 0.1
+          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 250/2, 0.15);
+          currentPosition.z = lerp(currentPosition.z, targetPosition.z/2, 0.15);
+
+          // Cập nhật vị trí cho `enti`
+          enti[index].setAttribute("position", `${currentPosition.x} ${currentPosition.y} ${currentPosition.z}`);
+        }
       }
       requestAnimationFrame(updateMarkerPosition); // Tiếp tục lặp lại
     };
