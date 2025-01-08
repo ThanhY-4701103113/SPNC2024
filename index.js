@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
           confirmationDiv.style.display = 'none';
           kq.style.display = 'none';
         }
-      }, 1000); // 1 giây
+      }, 800); // 1 giây
     });
     //vị trí ban đầu
     const currentPosition = { x: 0, y: 0, z: -2000 };
