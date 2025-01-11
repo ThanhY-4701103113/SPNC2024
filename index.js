@@ -135,8 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
           Math.abs(currentPosition.y - targetPosition.y) > MAX_DISTANCE ||
           Math.abs(currentPosition.z - targetPosition.z) > MAX_DISTANCE) {
             // Tính toán vị trí mượt
-          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 220/2, 0.15); // Alpha = 0.1
-          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 250/2, 0.15);
+          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 210/2, 0.2); // Alpha = 0.1
+          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 250/2, 0.2);
           currentPosition.z = lerp(currentPosition.z, targetPosition.z/2, 0.15);
 
           // Cập nhật vị trí cho `enti`
@@ -821,5 +821,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
