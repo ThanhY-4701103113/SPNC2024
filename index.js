@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const confirmationDiv = document.querySelector('.kt');
   const kq = document.querySelector('.kq');
   const trackedEntities = {};
+  const button = document.querySelector(".onvideo");
   nftMarkers.forEach((marker, index) => {
     marker.addEventListener('markerFound', () => {
       trackedEntities[index] = true;
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Hiển thị thẻ div khi tìm thấy marker
       confirmationDiv.style.display = 'block';
       kq.style.display = 'block'; 
+      button.style.display = 'block';
       loadQuestionsByTopic(tpic);
     });
     marker.addEventListener('markerLost', () => {
@@ -116,8 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
           enti[index].setAttribute("position", "0 0 -2000");
           confirmationDiv.style.display = 'none';
           kq.style.display = 'none';
+          button.style.display = 'none';
         }
-      }, 800); // 1 giây
+      }, 300); // 0.5 giây
     });
     //vị trí ban đầu
     const currentPosition = { x: 0, y: 0, z: -2000 };
@@ -132,8 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
           Math.abs(currentPosition.y - targetPosition.y) > MAX_DISTANCE ||
           Math.abs(currentPosition.z - targetPosition.z) > MAX_DISTANCE) {
             // Tính toán vị trí mượt
-          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 210/2, 0.15); // Alpha = 0.1
-          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 260/2, 0.15);
+          currentPosition.x = lerp(currentPosition.x, targetPosition.x/2 + 220/2, 0.15); // Alpha = 0.1
+          currentPosition.y = lerp(currentPosition.y, targetPosition.y/2 + 250/2, 0.15);
           currentPosition.z = lerp(currentPosition.z, targetPosition.z/2, 0.15);
 
           // Cập nhật vị trí cho `enti`
@@ -691,11 +694,12 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
-let currentTopicQuestions = [];
-let daDung = 0;
+let currentTopicQuestions = []; 
+let daDung = Array(20).fill(0);
 function loadQuestionsByTopic(tpic) {
+  const kq = document.querySelector('.kq');
+  kq.textContent = "Bạn đã đúng "+ daDung[tpic] +"/3";
   currentQuestionIndex = 0; // Reset câu hỏi
-  daDung = 0;
   currentTopicQuestions = questions.filter(q => q.topic == tpic); // Lọc câu hỏi theo topic
   
   if (currentTopicQuestions.length > 0) {
@@ -739,7 +743,7 @@ answerButtons.forEach(button => {
     const thongbao = document.querySelector('.thongbao'); 
     if (selectedValue == currentTopicQuestions[currentQuestionIndex].correct) {
       // Hiển thị thông báo
-      daDung++;
+      daDung[tpic]++;
       CapNhatThongBao("T")
       thongbao.classList.remove('d-none');
       // Ẩn thông báo sau 2 giây
@@ -777,12 +781,11 @@ function CapNhatThongBao(string){
     checkm.classList.add('d-none');
     checkx.classList.remove('d-none');
   }
-  dapandung.textContent = "Bạn đã đúng "+ daDung +"/3";
-  kq.textContent = "Bạn đã đúng "+ daDung +"/3";
+  dapandung.textContent = "Bạn đã đúng "+ daDung[tpic] +"/3";
+  kq.textContent = "Bạn đã đúng "+ daDung[tpic] +"/3";
   
 }
-// Gọi hàm này để nạp câu hỏi đầu tiên theo topic
-loadQuestionsByTopic(1); // Mặc định là topic 1
+
 function offkhung(){
   const khung = document.querySelector('.khung');  
   if (khung.classList.contains('d-none')) {
@@ -793,7 +796,7 @@ function offkhung(){
 }
 //video
 document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("onvideo");
+  const button = document.querySelector(".onvideo");
   const out = document.getElementById("thoat");
   const entity = document.getElementById("box-and-text");
   const videoElement = document.getElementById("s");
